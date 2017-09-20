@@ -1,11 +1,9 @@
 package com.solidblocks.crypto.ballance
 
-import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.kittinunf.fuel.httpGet
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
-import java.io.Reader
 import java.math.BigDecimal
 
 
@@ -13,24 +11,31 @@ data class CoinmarketcapTicker(val name: String,
                                val symbol: String,
                                @SerializedName("price_btc") val priceBTC: BigDecimal,
                                @SerializedName("price_usd") val priceUSD: BigDecimal
-) {
+)
 
-    class Deserializer : ResponseDeserializable<CoinmarketcapTicker> {
-        override fun deserialize(reader: Reader) = Gson().fromJson(reader, CoinmarketcapTicker::class.java)
-    }
+class CoinmarketcapTickers(private val tickers: List<CoinmarketcapTicker>) {
 
-    class ListDeserializer : ResponseDeserializable<List<CoinmarketcapTicker>> {
-        override fun deserialize(reader: Reader): List<CoinmarketcapTicker> {
-            val type = object : TypeToken<List<CoinmarketcapTicker>>() {}.type
-            return Gson().fromJson(reader, type)
-        }
+    val tickersAliases = hashMapOf("STR" to "XLM")
+
+    fun findTicker(tickerSymbol: String): CoinmarketcapTicker {
+        val symbol = if (tickersAliases.contains(tickerSymbol)) tickersAliases[tickerSymbol] else tickerSymbol
+        return tickers.last { it.symbol == symbol }
     }
 }
 
-class CoinmarketcapClient() {
-    fun getTickers(): List<CoinmarketcapTicker> {
-        val (_, _, result) = "https://api.coinmarketcap.com/v1/ticker?convert=GBP".httpGet()
-                .responseObject(CoinmarketcapTicker.ListDeserializer())
-        return result.get()
+interface CoinmarketcapClient {
+    fun getTickers(): CoinmarketcapTickers
+}
+
+class CoinmarketcapClientImpl : CoinmarketcapClient {
+    override fun getTickers(): CoinmarketcapTickers {
+        val (_, _, result) = "https://api.coinmarketcap.com/v1/ticker".httpGet().responseString()
+        val type = object : TypeToken<List<CoinmarketcapTicker>>() {}.type
+        return CoinmarketcapTickers(Gson().fromJson<List<CoinmarketcapTicker>>(result.get(), type))
     }
+}
+
+fun main(args: Array<String>) {
+
+    print(CoinmarketcapClientImpl().getTickers())
 }

@@ -17,7 +17,7 @@ object ExchangeServiceSpec : Spek({
         val singleExchangeConfig = ExchangeConfig(mock())
         val configList: ExchangeConfigList = ExchangeConfigList(listOf(singleExchangeConfig))
         val exchangeAdapter = mock<ExchangeClient>()
-        val exchangeService = ExchangeService(configList, exchangeAdapter)
+        val exchangeService = ExchangeServiceImpl(configList, exchangeAdapter)
 
         on("fetch") {
             val coinBalance = CoinBalance(Currency.AFN, BigDecimal.TEN)
@@ -32,10 +32,10 @@ object ExchangeServiceSpec : Spek({
             }
 
             it("should return fetched wallet") {
-                assertThat(balances.coinBalanceList, hasElement(coinBalance))
+                assertThat(balances.coinBalance, hasElement(coinBalance))
             }
             it("should filter out empty coins") {
-                assertThat(balances.coinBalanceList, !hasElement(zeroCoinBalance))
+                assertThat(balances.coinBalance, !hasElement(zeroCoinBalance))
             }
         }
     }

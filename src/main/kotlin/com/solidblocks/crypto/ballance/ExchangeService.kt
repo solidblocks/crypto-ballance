@@ -2,9 +2,13 @@ package com.solidblocks.crypto.ballance
 
 import java.math.BigDecimal
 
-class ExchangeService(var exchangeConfigList: ExchangeConfigList, var exchangeClient: ExchangeClient) {
+interface ExchangeService {
+    fun fetch(): Wallet
+}
 
-    fun fetch(): TotalBalances {
+class ExchangeServiceImpl(private var exchangeConfigList: ExchangeConfigList, private var exchangeClient: ExchangeClient) : ExchangeService {
+
+    override fun fetch(): Wallet {
 
         val coinBalanceList = mutableListOf<CoinBalance>()
         exchangeConfigList.configList.forEach {
@@ -12,6 +16,6 @@ class ExchangeService(var exchangeConfigList: ExchangeConfigList, var exchangeCl
             val filteredCoins = fetchWallet.coinBalance.filter { BigDecimal.ZERO.compareTo(it.amount) != 0 }
             coinBalanceList.addAll(filteredCoins)
         }
-        return TotalBalances(coinBalanceList)
+        return Wallet(coinBalanceList)
     }
 }
