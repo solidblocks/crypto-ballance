@@ -14,10 +14,10 @@ import java.math.BigDecimal
 
 object ExchangeServiceSpec : Spek({
     describe("Exchange service") {
-        val singleExchangeConfig = ExchangeConfig(mock())
-        val configList: ExchangeConfigList = ExchangeConfigList(listOf(singleExchangeConfig))
+        val singleExchangeConfig = ExchangeClientConfig(mock())
+        val clientConfigList: ExchangeClientConfigList = ExchangeClientConfigList(listOf(singleExchangeConfig))
         val exchangeAdapter = mock<ExchangeClient>()
-        val exchangeService = ExchangeServiceImpl(configList, exchangeAdapter)
+        val exchangeService = ExchangeServiceImpl(clientConfigList, exchangeAdapter)
 
         on("fetch") {
             val coinBalance = CoinBalance(Currency.AFN, BigDecimal.TEN)

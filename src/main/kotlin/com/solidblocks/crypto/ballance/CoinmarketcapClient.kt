@@ -34,8 +34,3 @@ class CoinmarketcapClientImpl : CoinmarketcapClient {
         return CoinmarketcapTickers(Gson().fromJson<List<CoinmarketcapTicker>>(result.get(), type))
     }
 }
-
-fun main(args: Array<String>) {
-
-    print(CoinmarketcapClientImpl().getTickers())
-}

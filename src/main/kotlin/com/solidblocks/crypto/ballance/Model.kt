@@ -5,9 +5,9 @@ import org.knowm.xchange.currency.Currency
 import java.math.BigDecimal
 
 
-data class ExchangeConfig(val specification: ExchangeSpecification)
+data class ExchangeClientConfig(val specification: ExchangeSpecification)
 
-data class ExchangeConfigList(var configList: List<ExchangeConfig>)
+data class ExchangeClientConfigList(var clientConfigList: List<ExchangeClientConfig>)
 
 data class Wallet(val coinBalance: List<CoinBalance>)
 
