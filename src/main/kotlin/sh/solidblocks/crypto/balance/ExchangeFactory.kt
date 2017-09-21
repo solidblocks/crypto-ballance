@@ -20,17 +20,16 @@ class ExchangeFactory {
             "gdax" to GDAXExchange().defaultExchangeSpecification
     )
 
-    fun create(configs: List<ExchangeConfig>): ExchangeClientConfigList {
-        val specifications = configs.filter { !it.ignore }.map {
+    fun create(configs: List<ExchangeConfig>): List<ExchangeClient> {
+        return configs.filter { !it.ignore }.map {
             val exchangeSpecification = exchangeMapping[it.type] ?: throw IllegalArgumentException("No exchange of type ${it.type}")
             exchangeSpecification.apiKey = it.apiKey
             exchangeSpecification.secretKey = it.secretKey
             if (it.additionalParams != null) {
                 it.additionalParams.forEach { key, value -> exchangeSpecification.setExchangeSpecificParametersItem(key, value) }
             }
-            ExchangeClientConfig(exchangeSpecification)
+            ExchangeClientImpl(exchangeSpecification)
         }
-        return ExchangeClientConfigList(specifications)
     }
 
 

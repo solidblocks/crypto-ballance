@@ -1,21 +1,18 @@
 package sh.solidblocks.crypto.balance
 
-import java.math.BigDecimal
+class ExchangeWalletsApp(configs: List<ExchangeConfig>) {
+    private val walletFilter = WalletFilter()
+    private val totalCalculator = TotalCalculator()
+    private val coinmarketcapClient = CoinmarketcapClientImpl()
+    private val exchangeServiceList = ExchangeFactory().create(configs)
 
-interface ExchangeService {
-    fun fetch(): Wallet
-}
-
-class ExchangeServiceImpl(private var exchangeClientConfigList: ExchangeClientConfigList, private var exchangeClient: ExchangeClient) : ExchangeService {
-
-    override fun fetch(): Wallet {
-
-        val coinBalanceList = mutableListOf<CoinBalance>()
-        exchangeClientConfigList.clientConfigList.forEach {
-            val fetchWallet = exchangeClient.fetchWallet(it)
-            val filteredCoins = fetchWallet.coinBalance.filter { BigDecimal.ZERO.compareTo(it.amount) != 0 }
-            coinBalanceList.addAll(filteredCoins)
-        }
-        return Wallet(coinBalanceList)
+    fun fetchAllWallets(): Wallets {
+        val tickers = coinmarketcapClient.getTickers()
+        val walletList = exchangeServiceList
+                .map { it.fetchWallet() }
+                .map { walletFilter.filterOutEmptyBalances(it) }
+                .map { totalCalculator.calculate(tickers, it) }
+        return Wallets(walletList, walletList.map { it.total }.reduce { a, b -> a.add(b) })
     }
+
 }
