@@ -1,4 +1,4 @@
-package com.solidblocks.crypto.ballance
+package sh.solidblocks.crypto.balance
 
 import com.github.kittinunf.fuel.httpGet
 import com.google.gson.Gson

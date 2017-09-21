@@ -1,4 +1,4 @@
-package com.solidblocks.crypto.ballance
+package sh.solidblocks.crypto.balance
 
 import org.knowm.xchange.ExchangeSpecification
 import org.knowm.xchange.currency.Currency

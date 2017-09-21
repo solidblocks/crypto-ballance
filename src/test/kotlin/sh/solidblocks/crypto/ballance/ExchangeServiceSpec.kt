@@ -1,4 +1,4 @@
-package com.solidblocks.crypto.ballance
+package sh.solidblocks.crypto.ballance
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.hasElement
@@ -10,6 +10,7 @@ import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
 import org.knowm.xchange.currency.Currency
+import sh.solidblocks.crypto.balance.*
 import java.math.BigDecimal
 
 object ExchangeServiceSpec : Spek({

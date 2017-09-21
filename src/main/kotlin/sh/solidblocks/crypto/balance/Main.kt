@@ -1,4 +1,4 @@
-package com.solidblocks.crypto.ballance
+package sh.solidblocks.crypto.balance
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

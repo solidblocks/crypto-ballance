@@ -1,4 +1,4 @@
-package com.solidblocks.crypto.ballance
+package sh.solidblocks.crypto.balance
 
 import org.knowm.xchange.bittrex.v1.BittrexExchange
 import org.knowm.xchange.gdax.GDAXExchange
