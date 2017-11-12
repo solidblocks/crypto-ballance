@@ -22,7 +22,6 @@ class CoinmarketcapTickers(private val tickers: List<CoinmarketcapTicker>) {
 
     fun findTicker(tickerSymbol: String): CoinmarketcapTicker {
         val symbol = if (tickersAliases.contains(tickerSymbol)) tickersAliases[tickerSymbol] else tickerSymbol
-        println(symbol)
         return tickers.last { it.symbol == symbol }
     }
 }
