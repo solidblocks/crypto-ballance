@@ -1,5 +1,6 @@
 package sh.solidblocks.crypto.balance
 
+import org.knowm.xchange.binance.BinanceExchange
 import org.knowm.xchange.bittrex.v1.BittrexExchange
 import org.knowm.xchange.gdax.GDAXExchange
 import org.knowm.xchange.kraken.KrakenExchange
@@ -17,7 +18,8 @@ class ExchangeFactory {
             "bittrex" to BittrexExchange().defaultExchangeSpecification,
             "poloniex" to PoloniexExchange().defaultExchangeSpecification,
             "kraken" to KrakenExchange().defaultExchangeSpecification,
-            "gdax" to GDAXExchange().defaultExchangeSpecification
+            "gdax" to GDAXExchange().defaultExchangeSpecification,
+            "binance" to BinanceExchange().defaultExchangeSpecification
     )
 
     fun create(configs: List<ExchangeConfig>): List<ExchangeClient> {

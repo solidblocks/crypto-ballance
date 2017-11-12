@@ -29,7 +29,7 @@ interface CoinmarketcapClient {
 
 class CoinmarketcapClientImpl : CoinmarketcapClient {
     override fun getTickers(): CoinmarketcapTickers {
-        val (_, _, result) = "https://api.coinmarketcap.com/v1/ticker".httpGet().responseString()
+        val (_, _, result) = "https://api.coinmarketcap.com/v1/ticker?limit=0".httpGet().responseString()
         val type = object : TypeToken<List<CoinmarketcapTicker>>() {}.type
         return CoinmarketcapTickers(Gson().fromJson<List<CoinmarketcapTicker>>(result.get(), type))
     }

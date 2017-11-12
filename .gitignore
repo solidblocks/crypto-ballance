@@ -36,5 +36,5 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 Java.gitignore
 out/
-config.json
+config*.json
 .bintray
