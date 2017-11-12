@@ -15,10 +15,14 @@ data class CoinmarketcapTicker(val name: String,
 
 class CoinmarketcapTickers(private val tickers: List<CoinmarketcapTicker>) {
 
-    val tickersAliases = hashMapOf("STR" to "XLM")
+    val tickersAliases = hashMapOf(
+            "STR" to "XLM",
+            "IOT" to "MIOTA"
+    )
 
     fun findTicker(tickerSymbol: String): CoinmarketcapTicker {
         val symbol = if (tickersAliases.contains(tickerSymbol)) tickersAliases[tickerSymbol] else tickerSymbol
+        println(symbol)
         return tickers.last { it.symbol == symbol }
     }
 }
