@@ -2,7 +2,7 @@ group 'sh.solidblocks.crypto'
 version '0.0.2'
 
 buildscript {
-    ext.kotlin_version = '1.1.4-3'
+    ext.kotlin_version = '1.2.0'
 
     repositories {
         mavenCentral()
@@ -35,12 +35,12 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    compile 'org.knowm.xchange:xchange-core:4.3.0'
+    compile 'org.knowm.xchange:xchange-core:4.3.1'
     compile 'org.knowm.xchange:xchange-bittrex:4.2.0'
     compile 'org.knowm.xchange:xchange-poloniex:4.2.0'
-    compile 'org.knowm.xchange:xchange-kraken:4.2.0'
+    compile 'org.knowm.xchange:xchange-kraken:4.3.1'
     compile 'org.knowm.xchange:xchange-gdax:4.2.2'
-    compile 'org.knowm.xchange:xchange-binance:4.3.0'
+    compile 'org.knowm.xchange:xchange-binance:4.3.1'
     compile 'org.knowm.xchange:xchange-bitfinex:4.3.0'
     compile 'com.github.kittinunf.fuel:fuel:1.10.0'
     compile 'com.github.kittinunf.fuel:fuel-gson:1.10.0'
