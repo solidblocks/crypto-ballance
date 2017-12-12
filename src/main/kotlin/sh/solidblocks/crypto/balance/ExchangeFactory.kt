@@ -32,7 +32,7 @@ class ExchangeFactory {
             if (it.additionalParams != null) {
                 it.additionalParams.forEach { key, value -> exchangeSpecification.setExchangeSpecificParametersItem(key, value) }
             }
-            ExchangeClientImpl(exchangeSpecification)
+            ExchangeClientImpl(exchangeSpecification, it.type)
         }
     }
 

@@ -18,7 +18,7 @@ object TotalCalculatorSpec : Spek({
 
         on("calculate single result") {
             val tickers = CoinmarketcapTickers(listOf(CoinmarketcapTicker("Litecoin", "LTC", BigDecimal(0.1), BigDecimal(123123.123))))
-            val wallet = Wallet(listOf(CoinBalance(Currency.LTC, BigDecimal(10.0))))
+            val wallet = Wallet(listOf(CoinBalance(Currency.LTC, BigDecimal(10.0))), "Wallet")
             val total = totalCalculator.calculate(tickers, FiatPrice(BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE), wallet)
             val totalCoinBalance = total.coinBalanceList[0]
 

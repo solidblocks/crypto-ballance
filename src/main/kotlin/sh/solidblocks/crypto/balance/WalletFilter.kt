@@ -6,6 +6,6 @@ class WalletFilter {
 
     fun filterOutEmptyBalances(wallet: Wallet): Wallet {
         val filteredCoins = wallet.coinBalance.filter { BigDecimal.ZERO.compareTo(it.amount) != 0 }
-        return Wallet(filteredCoins)
+        return Wallet(filteredCoins, wallet.name)
     }
 }

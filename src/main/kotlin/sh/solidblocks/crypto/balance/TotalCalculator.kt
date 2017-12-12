@@ -11,7 +11,7 @@ class TotalCalculator {
             CoinBalanceWithTotal(coinBalance.currency, coinBalance.amount, totalInBTC)
         }
         val total = result.map { it.amountInBTC }.reduce { a, b -> a.add(b) }
-        return WalletWithTotal(result, total)
+        return WalletWithTotal(result, total, wallet.name)
     }
 
     private fun getTotalInBTC(tickers: CoinmarketcapTickers, fiatBTCPrice: FiatPrice, coinBalance: CoinBalance): BigDecimal {
